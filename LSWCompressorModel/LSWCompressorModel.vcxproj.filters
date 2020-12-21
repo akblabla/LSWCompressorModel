@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Controller">
+      <UniqueIdentifier>{1026d353-8aa7-47ee-858b-ce5dea57f1fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\View">
+      <UniqueIdentifier>{49085914-37d5-4eef-be60-7e034b0e79a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controller">
+      <UniqueIdentifier>{851a50fe-4ecb-4a62-bd4b-fc92dd9bd012}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View">
+      <UniqueIdentifier>{8072b525-c6c4-4f8c-99e8-ca7ceac224fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CommandPattern">
+      <UniqueIdentifier>{2964bf45-62c6-4f39-988a-90de7d84ab48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CommandPattern">
+      <UniqueIdentifier>{c5b53e98-be07-4e7e-ae85-f4d79d5adde4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FileSystem">
+      <UniqueIdentifier>{0194b566-eec7-497f-9ffd-9b51be6cbb45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\FileSystem">
+      <UniqueIdentifier>{978690fa-1d8a-4a69-b296-2b4eaf620f5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Test">
+      <UniqueIdentifier>{1fa9d65c-5b3f-45aa-aeff-05018d8953da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Test">
+      <UniqueIdentifier>{3a6bb05c-fe10-4830-a2f4-c3021aa85571}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LZW">
+      <UniqueIdentifier>{f602aec7-4573-4987-ae0b-8b205ef4f371}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\LZW">
+      <UniqueIdentifier>{7f85cf74-5294-4362-b7e9-8c83bf50d10d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\LZW\Decompress">
+      <UniqueIdentifier>{c4f3af82-f272-40e3-b317-43a78c070b91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\LZW\Compress">
+      <UniqueIdentifier>{a6d5e6fe-6bd1-4aee-9468-b9cb11c4146d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LZW\Decompress">
+      <UniqueIdentifier>{57eaf41c-2e71-4bbb-b526-aa8ce4e849a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LZW\Compress">
+      <UniqueIdentifier>{d7cdab13-1356-4f98-be48-b600e59228d0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LSWCompressorModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleView.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="ControllerFactory.cpp">
+      <Filter>Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="SoftwareDecompressStrategy.cpp">
+      <Filter>Source Files\LZW\Decompress</Filter>
+    </ClCompile>
+    <ClCompile Include="SoftwareCompressStrategy.cpp">
+      <Filter>Source Files\LZW\Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="Splitter.cpp">
+      <Filter>Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="ControllerClient.cpp">
+      <Filter>Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Invoker.cpp">
+      <Filter>Source Files\CommandPattern</Filter>
+    </ClCompile>
+    <ClCompile Include="FileAccess.cpp">
+      <Filter>Source Files\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="BitFileAccess.cpp">
+      <Filter>Source Files\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="iAccess.cpp">
+      <Filter>Source Files\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ListAccess.cpp">
+      <Filter>Source Files\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="DictNode.cpp">
+      <Filter>Source Files\LZW</Filter>
+    </ClCompile>
+    <ClCompile Include="Dictionary.cpp">
+      <Filter>Source Files\LZW</Filter>
+    </ClCompile>
+    <ClCompile Include="bitAccessTest.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="dictionaryTest.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ControllerFactory.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Splitter.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="SoftwareCompressStrategy.h">
+      <Filter>Header Files\LZW\Compress</Filter>
+    </ClInclude>
+    <ClInclude Include="iCompressStrategy.h">
+      <Filter>Header Files\LZW\Compress</Filter>
+    </ClInclude>
+    <ClInclude Include="iDecompressStrategy.h">
+      <Filter>Header Files\LZW\Decompress</Filter>
+    </ClInclude>
+    <ClInclude Include="SoftwareDecompressStrategy.h">
+      <Filter>Header Files\LZW\Decompress</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleView.h">
+      <Filter>Header Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="ControllerClient.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="iController.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Invoker.h">
+      <Filter>Header Files\CommandPattern</Filter>
+    </ClInclude>
+    <ClInclude Include="iCommand.h">
+      <Filter>Header Files\CommandPattern</Filter>
+    </ClInclude>
+    <ClInclude Include="PopFrontQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileAccess.h">
+      <Filter>Header Files\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="BitFileAccess.h">
+      <Filter>Header Files\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="iAccess.h">
+      <Filter>Header Files\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="ListAccess.h">
+      <Filter>Header Files\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="test.h">
+      <Filter>Header Files\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="DictNode.h">
+      <Filter>Header Files\LZW</Filter>
+    </ClInclude>
+    <ClInclude Include="LZWGlobal.h">
+      <Filter>Header Files\LZW</Filter>
+    </ClInclude>
+    <ClInclude Include="Dictionary.h">
+      <Filter>Header Files\LZW</Filter>
+    </ClInclude>
+    <ClInclude Include="dictionaryTest.h">
+      <Filter>Header Files\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="bitAccessTest.h">
+      <Filter>Header Files\Test</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
