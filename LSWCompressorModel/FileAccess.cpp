@@ -46,7 +46,6 @@ char* FileAccess::gets(char* str, int num)
 int FileAccess::putc(int character)
 {
 	if (!_isOpen) return EOF;
-	seek(0, SEEK_MODE::cur);
 	return std::fputc(character, _filePtr);
 }
 

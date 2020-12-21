@@ -1,4 +1,4 @@
-﻿  FileAccess.cpp
+﻿  Controller.cpp
 C:\Users\akbla\source\repos\LSWCompressorModel\LSWCompressorModel\FileAccess.h(3,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
-C:\Users\akbla\source\repos\LSWCompressorModel\LSWCompressorModel\FileAccess.cpp : message : see previous definition of '_CRT_SECURE_NO_WARNINGS'
+C:\Users\akbla\source\repos\LSWCompressorModel\LSWCompressorModel\Controller.cpp : message : see previous definition of '_CRT_SECURE_NO_WARNINGS'
   LSWCompressorModel.vcxproj -> C:\Users\akbla\source\repos\LSWCompressorModel\Debug\LSWCompressorModel.exe

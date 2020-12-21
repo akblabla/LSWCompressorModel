@@ -16,19 +16,22 @@ void Controller::compress(std::string s){
 		print("Command requires only 1 parameter.\n");
 		return;
 	}
-	auto src = FileAccess(s,"r");
+	auto src = FileAccess(s,"rb");
 	if (!src.isOpen()) {
 		print("Failed to open file " +s+"\n");
 		return;
 	}
 	std::string dstFileName = s + ".lsw";
-	auto dst = FileAccess(dstFileName, "w+");
+	auto dst = FileAccess(dstFileName, "wb+");
 	if (!dst.isOpen()) {
 		print("Failed to open file " + dstFileName + "\n");
 		return;
 	}
 	print("Compressing file: " + s + "\n");
-	_compressStrategyPtr->compress(src,dst);
+	if (_compressStrategyPtr->compress(src, dst) != 0) {
+		print("Failed to compress file " + dstFileName + "\n");
+		return;
+	}
 }
 void Controller::decompress(std::string s){
 	if (s.find_first_of(' ') != std::string::npos) {
@@ -43,18 +46,22 @@ void Controller::decompress(std::string s){
 		print("File is not in .lsw file.\n");
 		return;
 	}
-	auto src = FileAccess(s, "r");
+	auto src = FileAccess(s, "rb");
 	if (!src.isOpen()) {
 		print("Failed to open file " + s + "\n");
 		return;
 	}
-	auto dst = FileAccess(dstFileName, "w+");
+	auto dst = FileAccess(dstFileName, "wb+");
 	if (!dst.isOpen()) {
 		print("Failed to open file " + dstFileName + ".lsw\n");
 		return;
 	}
 	print("Decompressing file: " + s + "\n");
-	_decompressStrategyPtr->decompress(src,dst);
+	if (_decompressStrategyPtr->decompress(src, dst) != 0) {
+		print("Failed to decompress file " + dstFileName + "\n");
+		return;
+	}
+
 }
 void Controller::print(std::string s){
 	_splitter.pushAll(s);

@@ -35,11 +35,11 @@ int BitFileAccess::getBit()
 size_t BitFileAccess::getBits(void* bitPtr, size_t count)
 {
 	if (!closed) {
-		size_t curBitIndex;
+		long unsigned int curBitIndex;
 		for (curBitIndex = 0; curBitIndex < count; ++curBitIndex) {
 			int bit = getBit();
 			if (bit == EOF) break;
-			long int curByteIndex = curBitIndex / 8;
+			long unsigned int curByteIndex = curBitIndex / 8;
 			int shiftedBit = (bit << (curBitIndex % 8));
 			((unsigned char*)bitPtr)[curByteIndex] |= shiftedBit; //Write to most significant bit first
 		}
@@ -59,9 +59,9 @@ void BitFileAccess::putBit(unsigned char bit)
 void BitFileAccess::putBits(void* bitPtr, size_t count)
 {
 	if (!closed) {
-		size_t curBitIndex;
+		long unsigned int curBitIndex;
 		for (curBitIndex = 0; curBitIndex < count; ++curBitIndex) {
-			long int curByteIndex = curBitIndex / 8;
+			long unsigned int curByteIndex = curBitIndex / 8;
 			char result = 1 & (((unsigned char*)bitPtr)[curByteIndex] >> (curBitIndex % 8)); //Read the most significant bit first
 
 			putBit(result);

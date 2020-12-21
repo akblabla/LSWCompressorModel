@@ -19,6 +19,6 @@ private:
     const Mode _mode;
     int incCurBitIndex();
     char _curByte = 0;
-    long int _curBitIndex = 0;
+    long unsigned int _curBitIndex = 0;
     iAccess* const _fileAccessPtr;
 };
