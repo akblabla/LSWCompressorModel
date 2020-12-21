@@ -23,7 +23,7 @@ bool Dictionary::findCodeWord(unsigned int& codeWord, unsigned char* arrayPtr, u
 	return result;
 }
 
-int Dictionary::getNextCodeWord()
+unsigned int Dictionary::getNextCodeWord()
 {
 	_currentBiggestCodeWord++;
 	return _currentBiggestCodeWord;

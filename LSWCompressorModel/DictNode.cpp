@@ -31,36 +31,29 @@ We sort arrays by size, but if they are of equal size, we sort them by their siz
 
 bool DictNode::findDictionaryEntry(unsigned int& codeWord, DictNode*& dictNode, const unsigned char* arrayPtr, unsigned int arraySize)
 {
-	DictNode* directionPtr = nullptr;
-	if (arraySize < getArraySize())
-		directionPtr = _left;
-	else if (arraySize > getArraySize())
-		directionPtr = _right;
-	else
-	{
-		unsigned char* arrayOfNodePtr = new unsigned char[getArraySize()];
-		getArray(arrayOfNodePtr);
-		int comparison = compareArray(arrayPtr, arrayOfNodePtr, getArraySize());
-		if (comparison == 0){
-			dictNode = this;
-			return false;
-		}
-		else if (comparison<0)
-			directionPtr = _left;
-		else
-			directionPtr = _right;
+	if (arraySize == 1){
+		return false;
 	}
+	DictNode* directionPtr = nullptr;
+	int comparison = compareArray(arrayPtr, arraySize);
+	if (comparison == 0){
+		dictNode = this;
+		codeWord = _codeWord;
+		return false;
+	}
+	else if (comparison<0)
+		directionPtr = _left;
+	else
+		directionPtr = _right;
+	
 	if (directionPtr == nullptr){
 		if (arraySize>2){
-			DictNode* prefixNode;
-			_dictionary._rootPtr->findDictionaryEntry(codeWord, prefixNode, arrayPtr, arraySize-1);
-			addChild(_dictionary.getNextCodeWord(), arrayPtr[arraySize-1], *prefixNode);
-			dictNode = this;
-			codeWord = _codeWord;
+			addChild(arrayPtr, arraySize);
+			_dictionary._rootPtr->findDictionaryEntry(codeWord, dictNode, arrayPtr, arraySize - 1);
 		}
 		else
 		{
-			addChild(_dictionary.getNextCodeWord(), arrayPtr[arraySize - 1], arrayPtr[0]);
+			addChild(arrayPtr, arraySize);
 			codeWord = arrayPtr[0];
 		}
 		return true;
@@ -83,69 +76,70 @@ unsigned int DictNode::getArraySize()
 	return _arraySize;
 }
 
-void DictNode::addChild(unsigned int codeWord, unsigned char suffixChar, DictNode& prefixNode)
+void DictNode::addChild(const unsigned char* arrayPtr, unsigned int arraySize)
 {
-	bool comparison = compareArray(const unsigned char* arrayAPtr, const unsigned char* arrayBPtr, unsigned int arraySize)
-	if (codeWord < _codeWord) {
-		setLeftChild(codeWord, suffixChar, prefixNode);
+	bool comparison = compareArray(arrayPtr, arraySize);
+	if (comparison<0) {
+		setLeftChild(arrayPtr, arraySize);
 	}
 	else {
-		setRightChild(codeWord, suffixChar, prefixNode);
+		setRightChild(arrayPtr, arraySize);
 	}
 }
 
-void DictNode::setLeftChild(unsigned int codeWord, unsigned char suffixChar, DictNode& prefixNode)
+void DictNode::setLeftChild(const unsigned char* arrayPtr, unsigned int arraySize)
 {
-	if (_left == nullptr)
-	_left = new DictNode(codeWord, suffixChar, prefixNode, _dictionary);
-	else
-	_left->addChild(codeWord, suffixChar, prefixNode);
-}
-
-void DictNode::setRightChild(unsigned int codeWord, unsigned char suffixChar, DictNode& prefixNode)
-{
-	if (_right == nullptr)
-		_right = new DictNode(codeWord, suffixChar, prefixNode,_dictionary);
-	else
-		_right->addChild(codeWord, suffixChar, prefixNode);
-}
-
-void DictNode::addChild(unsigned int codeWord, unsigned char suffixChar, unsigned char prefixChar)
-{
-	if (codeWord < _codeWord) {
-		setLeftChild(codeWord, suffixChar, prefixChar);
+	if (_left == nullptr){
+		DictNode* prefixNode = nullptr;
+		unsigned int dontCare;
+		_dictionary._rootPtr->findDictionaryEntry(dontCare, prefixNode, arrayPtr, arraySize - 1);
+		if (prefixNode == nullptr)
+			_left = new DictNode(_dictionary.getNextCodeWord(), arrayPtr[arraySize - 1], arrayPtr[0], _dictionary);
+		else
+			_left = new DictNode(_dictionary.getNextCodeWord(), arrayPtr[arraySize - 1], *prefixNode, _dictionary);
 	}
-	else {
-		setRightChild(codeWord, suffixChar, prefixChar);
+	else
+	_left->addChild(arrayPtr, arraySize);
+}
+
+void DictNode::setRightChild(const unsigned char* arrayPtr, unsigned int arraySize)
+{
+	if (_right == nullptr) {
+		DictNode* prefixNode = nullptr;
+		unsigned int dontCare;
+		_dictionary._rootPtr->findDictionaryEntry(dontCare, prefixNode, arrayPtr, arraySize - 1);
+		if (prefixNode == nullptr)
+			_right = new DictNode(_dictionary.getNextCodeWord(), arrayPtr[arraySize - 1], arrayPtr[0], _dictionary);
+		else
+			_right = new DictNode(_dictionary.getNextCodeWord(), arrayPtr[arraySize - 1], *prefixNode, _dictionary);
 	}
-}
-
-void DictNode::setLeftChild(unsigned int codeWord, unsigned char suffixChar, unsigned char prefixChar)
-{
-	if (_left == nullptr)
-		_left = new DictNode(codeWord, suffixChar, prefixChar, _dictionary);
 	else
-		_left->addChild(codeWord, suffixChar, prefixChar);
+		_right->addChild(arrayPtr, arraySize);
 }
 
-void DictNode::setRightChild(unsigned int codeWord, unsigned char suffixChar, unsigned char prefixChar)
+int DictNode::compareArray(const unsigned char* arrayPtr, unsigned int arraySize)
 {
-	if (_right == nullptr)
-		_right = new DictNode(codeWord, suffixChar, prefixChar, _dictionary);
-	else
-		_right->addChild(codeWord, suffixChar, prefixChar);
-}
+	const unsigned char* arrayAPtr = arrayPtr;
+	size_t arrayASize = arraySize;
+	size_t arrayBSize = getArraySize();
+	unsigned char* arrayBPtr = new unsigned char[arrayBSize];
+	getArray(arrayBPtr);
+	size_t minArraySize = arrayASize;
+	if (arrayBSize < minArraySize) minArraySize = arrayBSize;
 
-int DictNode::compareArray(const unsigned char* arrayAPtr, const unsigned char* arrayBPtr, unsigned int arraySize)
-{
-	for (size_t i = 0; i < arraySize; ++i) {
+	for (int i = minArraySize -1; i >= 0; --i) {
 		if (arrayAPtr[i] != arrayBPtr[i]) {
-			if (arrayAPtr[i] > arrayBPtr[i])
-				return 1;
-			else
+			if (arrayAPtr[i] < arrayBPtr[i])
 				return -1;
+			else
+				return 1;
 		}
 	}
+	if (arrayASize < arrayBSize)
+		return -1;
+	else if (arrayASize > arrayBSize)
+		return 1;
+	
 	return 0;
 }
 

@@ -9,27 +9,51 @@ void dictionaryTest()
 	unsigned int codeWord = 0;
 	bool isNewCode = dict.findCodeWord(codeWord, dataPtr, 1);
 	assert(isNewCode == false);
+
 	isNewCode = dict.findCodeWord(codeWord, dataPtr, 2);
 	assert(isNewCode == true);
 	assert(codeWord == 't');
 	dataPtr++;
+
 	isNewCode = dict.findCodeWord(codeWord, dataPtr, 2);
 	assert(isNewCode == true);
 	assert(codeWord == 'h');
 	dataPtr++;
+
 	isNewCode = dict.findCodeWord(codeWord, dataPtr, 2);
 	assert(isNewCode == true);
 	assert(codeWord == 'i');
 	dataPtr++;
+
 	isNewCode = dict.findCodeWord(codeWord, dataPtr, 2);
 	assert(isNewCode == true);
 	assert(codeWord == 's');
 	dataPtr++;
+
 	isNewCode = dict.findCodeWord(codeWord, dataPtr, 2);
 	assert(isNewCode == true);
 	assert(codeWord == '_');
 	dataPtr++;
+
+	isNewCode = dict.findCodeWord(codeWord, dataPtr, 2);
+	assert(isNewCode == false);
 	isNewCode = dict.findCodeWord(codeWord, dataPtr, 3);
 	assert(isNewCode == true);
 	assert(codeWord == 258);
+	dataPtr++;
+	dataPtr++;
+
+	isNewCode = dict.findCodeWord(codeWord, dataPtr, 2);
+	assert(isNewCode == true);
+	assert(codeWord == '_');
+	dataPtr++;
+
+	isNewCode = dict.findCodeWord(codeWord, dataPtr, 2);
+	assert(isNewCode == false);
+	isNewCode = dict.findCodeWord(codeWord, dataPtr, 3);
+	assert(isNewCode == true);
+	assert(codeWord == 257);
+	dataPtr++;
+	dataPtr++;
+
 }
