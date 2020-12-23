@@ -6,12 +6,18 @@ class PopFrontQueue :
 	private std::queue<T>
 {
 public:
+	PopFrontQueue();
 	bool empty() const;
 	void push(const T& val);
 	T pop_front();
 private:
 	std::mutex _mutex;
 };
+
+template<typename T>
+inline PopFrontQueue<T>::PopFrontQueue()
+{
+}
 
 template<typename T>
 inline bool PopFrontQueue<T>::empty() const

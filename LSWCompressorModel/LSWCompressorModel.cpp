@@ -7,6 +7,7 @@
 int main()
 {
     test();
+    std::cout << "type something" << std::endl;
     Controller controller = ControllerFactory::createController();
     ConsoleView consoleView(controller);
     while (1);
