@@ -1,5 +1,6 @@
 #include "SoftwareCompressStrategy.h"
 #include "LZWGlobal.h"
+#include "OBitFile.h"
 static int hitCount = 0;
 
 
@@ -23,7 +24,7 @@ SoftwareCompressStrategy::SoftwareCompressStrategy()
 {
 }
 
-int SoftwareCompressStrategy::compress(iAccess& src, iAccess& dst)
+int SoftwareCompressStrategy::compress(std::istream& src, std::ostream& dst)
 {
     unsigned int code;                  /* code for current string */
     unsigned char currentCodeLen;       /* length of the current code */
@@ -33,7 +34,7 @@ int SoftwareCompressStrategy::compress(iAccess& src, iAccess& dst)
     DictNode* dictRoot;              /* root of dictionary tree */
     DictNode* node;                  /* node of dictionary tree */
 
-    BitFileAccess bfpOut(&dst,BitFileAccess::Mode::WRITE);
+    OBitFile bfpOut(dst);
 
     /* initialize dictionary as empty */
     dictRoot = NULL;
@@ -45,8 +46,7 @@ int SoftwareCompressStrategy::compress(iAccess& src, iAccess& dst)
 
     /* now start the actual encoding process */
 
-    c = src.getc();
-
+    c = src.get();
     if (EOF == c)
     {
         return -1;      /* empty file */
@@ -57,7 +57,7 @@ int SoftwareCompressStrategy::compress(iAccess& src, iAccess& dst)
     }
 
     /* create a tree root from 1st 2 character string */
-    if ((c = src.getc()) != EOF)
+    if ((c = src.get()) != EOF)
     {
         /* special case for NULL root */
         dictRoot = MakeNode(nextCode, code, c);
@@ -78,7 +78,7 @@ int SoftwareCompressStrategy::compress(iAccess& src, iAccess& dst)
     }
 
     /* now encode normally */
-    while ((c = src.getc()) != EOF)
+    while ((c = src.get()) != EOF)
     {
         /* look for code + c in the dictionary */
         node = findDictionaryEntry(dictRoot, code, c);
@@ -145,7 +145,6 @@ int SoftwareCompressStrategy::compress(iAccess& src, iAccess& dst)
 
     /* free the dictionary */
     FreeTree(dictRoot);
-
     return 0;
 }
 
@@ -290,7 +289,7 @@ DictNode* SoftwareCompressStrategy::findDictionaryEntry(DictNode* root,
 *                after a partial write, the partially written bits will not
 *                be unwritten.
 ***************************************************************************/
-void SoftwareCompressStrategy::putCodeWord(BitFileAccess& bfpOut, int code, const unsigned char codeLen)
+void SoftwareCompressStrategy::putCodeWord(OBitFile& bfpOut, int code, const unsigned char codeLen)
 {
 	bfpOut.putBits(&code, codeLen);
     hitCount++;

@@ -1,14 +1,13 @@
 #pragma once
 #include "iCompressStrategy.h"
-#include "BitFileAccess.h"
-
+#include "OBitFile.h"
 struct DictNode;
 class SoftwareCompressStrategy :
 	public iCompressStrategy
 {
 public:
 	SoftwareCompressStrategy();
-	int compress(iAccess& src, iAccess& dst);
+	int compress(std::istream& src, std::ostream& dst);
 private:
 
     //structure taken from https://github.com/MichaelDipperstein/lzw .
@@ -76,7 +75,7 @@ private:
 
 
     /* write encoded data */
-    void putCodeWord(BitFileAccess &bfpOut, int code,
+    void putCodeWord(OBitFile&bfpOut, int code,
         const unsigned char codeLen);
 };
 

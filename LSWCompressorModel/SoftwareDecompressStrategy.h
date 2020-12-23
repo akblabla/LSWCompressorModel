@@ -1,6 +1,7 @@
 #pragma once
 #include "iDecompressStrategy.h"
-#include "BitFileAccess.h"
+#include "IBitFile.h"
+
 typedef struct
 {
 	unsigned char suffixChar;   /* last char in encoded string */
@@ -12,7 +13,7 @@ class SoftwareDecompressStrategy :
 {
 public:
 	SoftwareDecompressStrategy();
-	int decompress(iAccess& src, iAccess& dst);
+	int decompress(std::istream& src, std::ostream& dst);
 private:
 	/***************************************************************************
 	*   Function   : DecodeRecursive
@@ -25,7 +26,7 @@ private:
 	*   Effects    : Decoded code word is written to a file
 	*   Returned   : The first character in the decoded string
 	***************************************************************************/
-	unsigned char DecodeRecursive(unsigned int code, iAccess& dst, decode_dictionary_t* dictionary);
+	unsigned char DecodeRecursive(unsigned int code, std::ostream& dst, decode_dictionary_t* dictionary);
 
 	/***************************************************************************
 	*   Function   : GetCodeWord
@@ -43,6 +44,6 @@ private:
 	*         be modified to read in all the bytes from least significant to
 	*         most significant followed by any left over bits.
 	***************************************************************************/
-	int GetCodeWord(BitFileAccess& bfpiN, const unsigned char codeLen);
+	int GetCodeWord(IBitFile& bfpiN, const unsigned char codeLen);
 };
 

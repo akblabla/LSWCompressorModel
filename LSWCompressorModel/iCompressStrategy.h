@@ -7,10 +7,11 @@
 
 #ifndef SRC_ICOMPRESSSTRATEGY_H_
 #define SRC_ICOMPRESSSTRATEGY_H_
-#include "iAccess.h"
+#include <istream>
+#include <ostream>
 class iCompressStrategy {
 public:
-	virtual int compress(iAccess& src, iAccess& dst) = 0;
+	virtual int compress(std::istream& src, std::ostream& dst) = 0;
 };
 
 #endif /* SRC_ICOMPRESSSTRATEGY_H_ */

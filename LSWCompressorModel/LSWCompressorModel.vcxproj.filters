@@ -117,6 +117,12 @@
     <ClCompile Include="dictionaryTest.cpp">
       <Filter>Source Files\Test</Filter>
     </ClCompile>
+    <ClCompile Include="IBitFile.cpp">
+      <Filter>Source Files\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="OBitFile.cpp">
+      <Filter>Source Files\FileSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ControllerFactory.h">
@@ -187,6 +193,12 @@
     </ClInclude>
     <ClInclude Include="bitAccessTest.h">
       <Filter>Header Files\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="IBitFile.h">
+      <Filter>Header Files\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="OBitFile.h">
+      <Filter>Header Files\FileSystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

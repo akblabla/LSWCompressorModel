@@ -6,7 +6,7 @@
  */
 #include <iostream>
 #include "Controller.h"
-#include "FileAccess.h"
+#include <fstream>
 Controller::Controller(iCompressStrategy* compressStrategyPtrParam,iDecompressStrategy* decompressStrategyPtrParam) {
 	_compressStrategyPtr = compressStrategyPtrParam;
 	_decompressStrategyPtr = decompressStrategyPtrParam;
@@ -16,22 +16,28 @@ void Controller::compress(std::string s){
 		print("Command requires only 1 parameter.\n");
 		return;
 	}
-	auto src = FileAccess(s,"rb");
-	if (!src.isOpen()) {
+	std::ifstream src(s, std::ifstream::in | std::ifstream::binary);
+
+	if (!src.is_open()) {
 		print("Failed to open file " +s+"\n");
 		return;
 	}
 	std::string dstFileName = s + ".lsw";
-	auto dst = FileAccess(dstFileName, "wb+");
-	if (!dst.isOpen()) {
+	std::ofstream dst(dstFileName, std::ofstream::out | std::ofstream::binary);
+	if (!dst.is_open()) {
 		print("Failed to open file " + dstFileName + "\n");
+		src.close();
 		return;
 	}
 	print("Compressing file: " + s + "\n");
 	if (_compressStrategyPtr->compress(src, dst) != 0) {
 		print("Failed to compress file " + dstFileName + "\n");
+		src.close();
+		dst.close();
 		return;
 	}
+	src.close();
+	dst.close();
 }
 void Controller::decompress(std::string s){
 	if (s.find_first_of(' ') != std::string::npos) {
@@ -46,22 +52,26 @@ void Controller::decompress(std::string s){
 		print("File is not in .lsw file.\n");
 		return;
 	}
-	auto src = FileAccess(s, "rb");
-	if (!src.isOpen()) {
+	std::ifstream src(s, std::ifstream::in | std::ifstream::binary);
+	if (!src.is_open()) {
 		print("Failed to open file " + s + "\n");
 		return;
 	}
-	auto dst = FileAccess(dstFileName, "wb+");
-	if (!dst.isOpen()) {
+	std::ofstream dst(dstFileName, std::ofstream::out | std::ofstream::binary);
+	if (!dst.is_open()) {
 		print("Failed to open file " + dstFileName + ".lsw\n");
+		src.close();
 		return;
 	}
 	print("Decompressing file: " + s + "\n");
 	if (_decompressStrategyPtr->decompress(src, dst) != 0) {
 		print("Failed to decompress file " + dstFileName + "\n");
+		src.close();
+		dst.close();
 		return;
 	}
-
+	src.close();
+	dst.close();
 }
 void Controller::print(std::string s){
 	_splitter.pushAll(s);

@@ -151,6 +151,7 @@
     <ClCompile Include="Dictionary.cpp" />
     <ClCompile Include="dictionaryTest.cpp" />
     <ClCompile Include="DictNode.cpp" />
+    <ClCompile Include="IBitFile.cpp" />
     <ClCompile Include="ListAccess.cpp" />
     <ClCompile Include="BitFileAccess.cpp" />
     <ClCompile Include="ConsoleView.cpp" />
@@ -161,6 +162,7 @@
     <ClCompile Include="iAccess.cpp" />
     <ClCompile Include="Invoker.cpp" />
     <ClCompile Include="LSWCompressorModel.cpp" />
+    <ClCompile Include="OBitFile.cpp" />
     <ClCompile Include="SoftwareCompressStrategy.cpp" />
     <ClCompile Include="SoftwareDecompressStrategy.cpp" />
     <ClCompile Include="Splitter.cpp" />
@@ -171,7 +173,9 @@
     <ClInclude Include="Dictionary.h" />
     <ClInclude Include="dictionaryTest.h" />
     <ClInclude Include="DictNode.h" />
+    <ClInclude Include="IBitFile.h" />
     <ClInclude Include="LZWGlobal.h" />
+    <ClInclude Include="OBitFile.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="ListAccess.h" />
     <ClInclude Include="BitFileAccess.h" />

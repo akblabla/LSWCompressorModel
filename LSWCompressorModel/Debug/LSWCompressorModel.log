@@ -1,10 +1,8 @@
-﻿  ConsoleView.cpp
-  Controller.cpp
-C:\Users\akbla\source\repos\LSWCompressorModel\LSWCompressorModel\FileAccess.h(3,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
-C:\Users\akbla\source\repos\LSWCompressorModel\LSWCompressorModel\Controller.cpp : message : see previous definition of '_CRT_SECURE_NO_WARNINGS'
-  ControllerClient.cpp
-  ControllerFactory.cpp
-  LSWCompressorModel.cpp
-  Splitter.cpp
+﻿  ControllerFactory.cpp
+  IBitFile.cpp
+  OBitFile.cpp
+  SoftwareCompressStrategy.cpp
+  SoftwareDecompressStrategy.cpp
+  bitAccessTest.cpp
   Generating Code...
   LSWCompressorModel.vcxproj -> C:\Users\akbla\source\repos\LSWCompressorModel\Debug\LSWCompressorModel.exe

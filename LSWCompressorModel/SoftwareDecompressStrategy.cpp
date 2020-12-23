@@ -6,7 +6,7 @@ SoftwareDecompressStrategy::SoftwareDecompressStrategy()
 {
 }
 
-int SoftwareDecompressStrategy::decompress(iAccess& src, iAccess& dst)
+int SoftwareDecompressStrategy::decompress(std::istream& src, std::ostream& dst)
 {
     unsigned int nextCode;              /* value of next code */
     unsigned int lastCode;              /* last decoded code word */
@@ -16,7 +16,7 @@ int SoftwareDecompressStrategy::decompress(iAccess& src, iAccess& dst)
     decode_dictionary_t* dictionary = new decode_dictionary_t[(MAX_CODES - FIRST_CODE)];
 
     /* convert input file to bitfile */
-    BitFileAccess bfpIn(&src, BitFileAccess::Mode::READ);
+    IBitFile bfpIn(src);
 
     /* start MIN_CODE_LEN bit code words */
     currentCodeLen = MIN_CODE_LEN;
@@ -27,7 +27,7 @@ int SoftwareDecompressStrategy::decompress(iAccess& src, iAccess& dst)
     /* first code from file must be a character.  use it for initial values */
     lastCode = GetCodeWord(bfpIn, currentCodeLen);
     c = lastCode;
-    dst.putc(lastCode);
+    dst.put(lastCode);
 
     /* decode rest of file */
     while ((int)(code = GetCodeWord(bfpIn, currentCodeLen)) != EOF)
@@ -58,7 +58,7 @@ int SoftwareDecompressStrategy::decompress(iAccess& src, iAccess& dst)
 
             tmp = c;
             c = DecodeRecursive(lastCode, dst, dictionary);
-            dst.putc(tmp);
+            dst.put(tmp);
         }
 
         /* if room, add new code to the dictionary */
@@ -76,7 +76,7 @@ int SoftwareDecompressStrategy::decompress(iAccess& src, iAccess& dst)
 	return 0;
 }
 
-unsigned char SoftwareDecompressStrategy::DecodeRecursive(unsigned int code, iAccess& dst, decode_dictionary_t* dictionary)
+unsigned char SoftwareDecompressStrategy::DecodeRecursive(unsigned int code, std::ostream& dst, decode_dictionary_t* dictionary)
 {
     unsigned char c;
     unsigned char firstChar;
@@ -97,11 +97,11 @@ unsigned char SoftwareDecompressStrategy::DecodeRecursive(unsigned int code, iAc
         firstChar = code;
     }
 
-    dst.putc(c);
+    dst.put(c);
     return firstChar;
 }
 
-int SoftwareDecompressStrategy::GetCodeWord(BitFileAccess& bfpiN, const unsigned char codeLen)
+int SoftwareDecompressStrategy::GetCodeWord(IBitFile& bfpiN, const unsigned char codeLen)
 {
     int code = 0;
     int count;
